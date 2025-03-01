@@ -1,0 +1,10 @@
+component _3314J_minus_1_minus_103E:
+    # component _3314J_minus_1_minus_103E
+    footprint = "RES-ADJ-SMD_3314J"
+    lcsc_id = "C36376"
+    mpn = "C36376"
+    # pins
+    signal _1 ~ pin 1
+    signal _2 ~ pin 2
+    signal _3 ~ pin 3
+

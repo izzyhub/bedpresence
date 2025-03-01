@@ -1,0 +1,9 @@
+component WJ127_minus_5_period_0_minus_2P:
+    # component WJ127_minus_5_period_0_minus_2P
+    footprint = "CONN-TH_2P-P5.00_CPC3703CTR"
+    lcsc_id = "C3703"
+    mpn = "C3703"
+    # pins
+    signal _1 ~ pin 1
+    signal _2 ~ pin 2
+

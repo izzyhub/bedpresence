@@ -1,0 +1,95 @@
+"""
+    ESP32-C3-MINI-1U-N4 minimal circuit, based on Figure 7, page 25
+    Datasheet: https://www.espressif.com/sites/default/files/documentation/esp32-c3-mini-1_datasheet_en.pdf
+    Released under CERN-OHL-P v2
+    Date: 2/15/2024
+"""
+from "elec/src/ESP32-C3-MINI-1U-N4.ato" import ESP32_C3_MINI_1U_N4  # external antenna
+from "elec/src/ESP32-C3-MINI-1-N4.ato" import ESP32_C3_MINI_1_N4    # pcb antenna
+from "generics/resistors.ato" import Resistor
+from "generics/capacitors.ato" import Capacitor
+from "generics/interfaces.ato" import UART, Power, USB2
+
+module _ESP32C3:
+    power = new Power
+    esp32c3 = new ESP32_C3_MINI_1U_N4
+    signal IO0 ~ esp32c3.IO0
+    signal IO1 ~ esp32c3.IO1
+    signal IO10 ~ esp32c3.IO10
+    signal IO3 ~ esp32c3.IO3
+    signal IO4 ~ esp32c3.IO4
+    signal IO5 ~ esp32c3.IO5
+    signal IO6 ~ esp32c3.IO6
+    signal IO7 ~ esp32c3.IO7
+    signal IO8 ~ esp32c3.IO8
+    signal IO9 ~ esp32c3.IO9
+    signal IO18 ~ esp32c3.IO18
+    signal IO19 ~ esp32c3.IO19
+    signal RXD0 ~ esp32c3.RXD0
+    signal TXD0 ~ esp32c3.TXD0
+
+    # strapping pins
+    """
+        R8 pulls IO8 HIGH to enable startup serial output, pg 12
+        R9 pulls IO2 HIGH according to datasheet, pg 12
+    """
+    r8 = new Resistor
+    r8.value = 10kohm +/- 10%
+    r8.footprint = "R0603"
+
+    r9 = new Resistor
+    r9.value = 10kohm +/- 10%
+    r9.footprint = "R0603"
+
+    r8.p1 ~ esp32c3.IO8
+    r8.p2 ~ power.vcc
+    r9.p1 ~ esp32c3.IO2
+    r9.p2 ~ power.vcc
+
+    # ENable
+    """
+        R1/C3 form an RC delay circuit, EN HIGH = enable chip, EN LOW = chip off, pg 25
+    """
+    r1 = new Resistor
+    r1.value = 10kohm +/- 10%
+    r1.footprint = "R0603"
+    c3 = new Capacitor
+    c3.value = 1uF +/- 40% # TODO: 40% is too large, but is closest match in atopile at the moment
+    c3.footprint = "C0603"
+
+    r1.p1 ~ power.vcc
+    r1.p2 ~ esp32c3.EN
+    esp32c3.EN ~ c3.p1
+    c3.p2 ~ power.gnd
+    
+    # connect power
+    power.gnd ~ esp32c3.GND
+    power.vcc ~ esp32c3._3V3
+    c1 = new Capacitor
+    c1.value = 10uF +/- 40% # TODO: 40% is too large, but is closest match in atopile at the moment
+    c1.footprint = "C0603"
+
+    c2 = new Capacitor
+    c2.value = 0.1uF +/- 40% # TODO: 40% is too large, but is closest match in atopile at the moment
+    c2.footprint = "C0603"
+
+    c1.power ~ power
+    c2.power ~ power
+
+    # connect USB
+    usb = new USB2
+    usb.dm ~ esp32c3.IO18
+    usb.dp ~ esp32c3.IO19
+
+    # connect UART
+    uart = new UART
+    uart.tx ~ esp32c3.TXD0
+    uart.rx ~ esp32c3.RXD0
+    uart.gnd ~ power.gnd  
+
+
+module ESP32C3_EXT_ANT from _ESP32C3:
+    esp32c3 -> ESP32_C3_MINI_1U_N4
+
+module ESP32C3_PCB_ANT from _ESP32C3:
+    esp32c3 -> ESP32_C3_MINI_1_N4

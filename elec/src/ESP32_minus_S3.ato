@@ -1,0 +1,64 @@
+component ESP32_minus_S3:
+    # component ESP32_minus_S3
+    footprint = "QFN-56_L7.0-W7.0-P0.40-TL-EP4.0"
+    lcsc_id = "C2913192"
+    mpn = "C2913192"
+    # pins
+    signal LNA_IN ~ pin 1
+    signal VDD3P3 ~ pin 2
+    VDD3P3 ~ pin 3
+    signal CHIP_PU ~ pin 4
+    signal GPIO0 ~ pin 5
+    signal GPIO1 ~ pin 6
+    signal GPIO2 ~ pin 7
+    signal GPIO3 ~ pin 8
+    signal GPIO4 ~ pin 9
+    signal GPIO5 ~ pin 10
+    signal GPIO6 ~ pin 11
+    signal GPIO7 ~ pin 12
+    signal GPIO8 ~ pin 13
+    signal GPIO9 ~ pin 14
+    signal GPIO10 ~ pin 15
+    signal GPIO11 ~ pin 16
+    signal GPIO12 ~ pin 17
+    signal GPIO13 ~ pin 18
+    signal GPIO14 ~ pin 19
+    signal VDD3P3_RTC ~ pin 20
+    signal XTAL_32K_P ~ pin 21
+    signal XTAL_32K_N ~ pin 22
+    signal GPIO17 ~ pin 23
+    signal GPIO18 ~ pin 24
+    signal GPIO19 ~ pin 25
+    signal GPIO20 ~ pin 26
+    signal GPIO21 ~ pin 27
+    signal SPICS1 ~ pin 28
+    signal VDD_SPI ~ pin 29
+    signal SPIHD ~ pin 30
+    signal SPIWP ~ pin 31
+    signal SPICS0 ~ pin 32
+    signal SPICLK ~ pin 33
+    signal SPIQ ~ pin 34
+    signal SPID ~ pin 35
+    signal SPICLK_N ~ pin 36
+    signal SPICLK_P ~ pin 37
+    signal GPIO33 ~ pin 38
+    signal GPIO34 ~ pin 39
+    signal GPIO35 ~ pin 40
+    signal GPIO36 ~ pin 41
+    signal GPIO37 ~ pin 42
+    signal GPIO38 ~ pin 43
+    signal MTCK ~ pin 44
+    signal MTDO ~ pin 45
+    signal VDD3P3_CPU ~ pin 46
+    signal MTDI ~ pin 47
+    signal MTMS ~ pin 48
+    signal U0TXD ~ pin 49
+    signal U0RXD ~ pin 50
+    signal GPIO45 ~ pin 51
+    signal GPIO46 ~ pin 52
+    signal XTAL_N ~ pin 53
+    signal XTAL_P ~ pin 54
+    signal VDDA ~ pin 55
+    VDDA ~ pin 56
+    signal EP ~ pin 57
+
