@@ -1,0 +1,37 @@
+import Power from "generics/interfaces.ato"
+import SPI from "generics/interfaces.ato"
+
+module DigiPot:
+  power = new Power
+  spi = new SPI
+  pot = new MCP42010T_minus_I_slash_SL
+
+  pot.VDD ~ power.vcc
+  pot.VSS ~ power.gnd
+
+  spi.mosi ~ pot.SI 
+  spi.miso ~ pot.SO
+  spi.sck ~ pot.sck
+  spi.cs ~ pot.CS_hash
+
+component MCP42010T_minus_I_slash_SL:
+    # component MCP42010T_minus_I_slash_SL
+    footprint = "SOIC-14_L8.7-W3.9-P1.27-LS6.0-BL"
+    lcsc_id = "C54781"
+    mpn = "C54781"
+    # pins
+    signal CS_hash ~ pin 1
+    signal SCK ~ pin 2
+    signal SI ~ pin 3
+    signal VSS ~ pin 4
+    signal PB1 ~ pin 5
+    signal PW1 ~ pin 6
+    signal PA1 ~ pin 7
+    signal PA0 ~ pin 8
+    signal PW0 ~ pin 9
+    signal PB0 ~ pin 10
+    signal RS_hash ~ pin 11
+    signal SHDN_hash ~ pin 12
+    signal SO ~ pin 13
+    signal VDD ~ pin 14
+
