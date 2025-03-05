@@ -4,7 +4,8 @@ from "usb-connectors/usb-connectors.ato" import USBCConn
 from "programming-headers/elec/src/programming-headers.ato" import TC2050
 from "ams1117-33/elec/src/ams1117-33.ato" import AMS111733
 from "_3314J_minus_1_minus_103E.ato" import _3314J_minus_1_minus_103E
-from "MCP42010T_minus_I_slash_SL.ato" import DigiPot
+from "WJ127_minus_5_period_0_minus_2P.ato" import WJ127_minus_5_period_0_minus_2P
+from "MCP41010_minus_I_slash_SN.ato" import DigiPot
 
 module Bedpresence:
     signal gnd
@@ -19,15 +20,27 @@ module Bedpresence:
     connector2 = new WJ127_minus_5_period_0_minus_2P
     connector3 = new WJ127_minus_5_period_0_minus_2P
     connector4 = new WJ127_minus_5_period_0_minus_2P
-    pot1 = new _3314J_minus_1_minus_103E
-    pot2 = new _3314J_minus_1_minus_103E
-    pot3 = new _3314J_minus_1_minus_103E
-    pot4 = new _3314J_minus_1_minus_103E
 
-    #digi_pot1 = new DigiPot
-    #digi_pot2 = new DigiPot
-    #digi_pot3 = new DigiPot
-    #digi_pot4 = new DigiPot
+    digi_pot1 = new DigiPot
+    digi_pot2 = new DigiPot
+    digi_pot3 = new DigiPot
+    digi_pot4 = new DigiPot
+
+    digi_pot1.spi.mosi ~ micro.io13;
+    digi_pot1.spi.sck ~ micro.io12
+    digi_pot1.spi.cs ~ micro.io11;
+
+    digi_pot2.spi.mosi ~ micro.io13;
+    digi_pot2.spi.sck ~ micro.io12
+    digi_pot2.spi.cs ~ micro.io15;
+
+    digi_pot3.spi.mosi ~ micro.io13;
+    digi_pot3.spi.sck ~ micro.io12
+    digi_pot3.spi.cs ~ micro.io16;
+
+    digi_pot4.spi.mosi ~ micro.io13;
+    digi_pot4.spi.sck ~ micro.io12
+    digi_pot4.spi.cs ~ micro.io17;
 
 
     usbc_connector.power ~ power5v
@@ -39,31 +52,23 @@ module Bedpresence:
     micro.jtag ~ jtag_connector.jtag
     usbc_connector.usb2 ~ micro.usb2
 
-    power3v3.vcc ~ pot1.1
-    power3v3.gnd ~ pot1.3
-
-    power3v3.vcc ~ pot2.1
-    power3v3.gnd ~ pot2.3
-
-    power3v3.vcc ~ pot3.1
-    power3v3.gnd ~ pot3.3
-
-    power3v3.vcc ~ pot4.1
-    power3v3.gnd ~ pot4.3
-
-    pot1.2 ~ connector1.1
-    pot1.2 ~ micro.io4
+    digi_pot1.power ~ power3v3
+    digi_pot1.pot.PA0 ~ power3v3.vcc
+    digi_pot1.pot.PB0 ~ connector1.1
     power3v3.gnd ~ connector1.2
 
-    pot2.2 ~ connector2.1
-    pot2.2 ~ micro.io5
+    digi_pot2.power ~ power3v3
+    digi_pot2.pot.PA0 ~ power3v3.vcc
+    digi_pot2.pot.PB0 ~ connector2.1
     power3v3.gnd ~ connector2.2
 
-    pot3.2 ~ connector3.1
-    pot2.2 ~ micro.io6
+    digi_pot3.power ~ power3v3
+    digi_pot3.pot.PA0 ~ power3v3.vcc
+    digi_pot3.pot.PB0 ~ connector3.1
     power3v3.gnd ~ connector3.2
 
-    pot4.2 ~ connector4.1
-    pot2.2 ~ micro.io7
+    digi_pot4.power ~ power3v3
+    digi_pot4.pot.PA0 ~ power3v3.vcc
+    digi_pot4.pot.PB0 ~ connector4.1
     power3v3.gnd ~ connector4.2
 
