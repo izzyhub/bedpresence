@@ -1,24 +1,25 @@
-import Power from "generics/interfaces.ato"
-import USB2 from "generics/interfaces.ato"
-import SPI from "generics/interfaces.ato"
-import I2C from "generics/interfaces.ato"
-import UART from "generics/interfaces.ato"
-import GPIO from "generics/interfaces.ato"
-import JTAG from "generics/interfaces.ato"
-import Resistor from "generics/resistors.ato"
-import ButtonPullup from "generics/buttons.ato"
-import ButtonSKRPACE010 from "generics/buttons.ato"
-import Capacitor from "generics/capacitors.ato"
+#pragma experiment("TRAITS")
+from "generics/interfaces.ato" import Power
+from "generics/interfaces.ato" import USB2
+from "generics/interfaces.ato" import SPIBus
+from "generics/interfaces.ato" import I2CBus
+from "generics/interfaces.ato" import UARTBus
+from "generics/interfaces.ato" import GPIO
+from "generics/interfaces.ato" import JTAGBus
+from "generics/buttons.ato" import ButtonPullup
+from "generics/buttons.ato" import ButtonSKRPACE010
+import Capacitor
+from "parts/Espressif_Systems_ESP32_S3_WROOM_1_N16R2/Espressif_Systems_ESP32_S3_WROOM_1_N16R2.ato" import Espressif_Systems_ESP32_S3_WROOM_1_N16R2_package
 
 module ESP32S3:
     """
     This is an esp32-s3 module.
     """
-    ic = new ESP32_S3_WROOM_1_N16R2_
+    ic = new Espressif_Systems_ESP32_S3_WROOM_1_N16R2_package
     power = new Power
 
     # connect up power
-    power.vcc ~ ic._3V3
+    power.vcc ~ ic.P3V3
     power.gnd ~ ic.GND
 
     # decoupling caps
@@ -26,17 +27,17 @@ module ESP32S3:
     big_cap_1 = new Capacitor
     big_cap_2 = new Capacitor
 
-    lil_cap.power ~ power
-    big_cap_1.power ~ power
-    big_cap_2.power ~ power
+    power.vcc ~ lil_cap.unnamed[0]; lil_cap.unnamed[1] ~ power.gnd
+    power.vcc ~ big_cap_1.unnamed[0]; big_cap_1.unnamed[1] ~ power.gnd
+    power.vcc ~ big_cap_2.unnamed[0]; big_cap_2.unnamed[1] ~ power.gnd
 
-    lil_cap.value = 100nF +/- 20%
-    big_cap_1.value = 10uF +/- 20%
-    big_cap_2.value = 10uF +/- 20%
+    lil_cap.capacitance = 100nF +/- 20%
+    big_cap_1.capacitance = 10uF +/- 20%
+    big_cap_2.capacitance = 10uF +/- 20%
 
-    lil_cap.footprint = "C0402"
-    big_cap_1.footprint = "C0805"
-    big_cap_2.footprint = "C0805"
+    lil_cap.package = "C0402"
+    big_cap_1.package = "C0805"
+    big_cap_2.package = "C0805"
 
     # reset button
     enable_button = new ButtonPullup
@@ -49,8 +50,8 @@ module ESP32S3:
     usb2.dm ~ ic.IO19
     usb2.dp ~ ic.IO20
 
-    # connect up JTAG
-    jtag = new JTAG
+    # connect up JTAGBus
+    jtag = new JTAGBus
     jtag.tck ~ ic.IO39
     jtag.tms ~ ic.IO42
     jtag.tdi ~ ic.IO41
@@ -58,7 +59,7 @@ module ESP32S3:
     jtag.vcc ~ power.vcc
     jtag.gnd ~ power.gnd
 
-    spi2 = new SPI
+    spi2 = new SPIBus
     # FSPI default pinout
     spi2.sck ~ ic.IO12
     spi2.mosi ~ ic.IO11
@@ -67,8 +68,8 @@ module ESP32S3:
     # spi.gnd ~ power.gnd
 
 
-    # connect up I2C
-    i2c = new I2C
+    # connect up I2CBus
+    i2c = new I2CBus
     i2c.scl ~ ic.IO6
     i2c.sda ~ ic.IO7
 
@@ -79,8 +80,8 @@ module ESP32S3:
     signal io3 ~ ic.IO3
     signal io4 ~ ic.IO4
     signal io5 ~ ic.IO5
-    signal io6 ~ ic.IO6 # Already connected to I2C
-    signal io7 ~ ic.IO7 # Already connected to I2C
+    signal io6 ~ ic.IO6 # Already connected to I2CBus
+    signal io7 ~ ic.IO7 # Already connected to I2CBus
     signal io8 ~ ic.IO8
     signal io9 ~ ic.IO9
     signal io10 ~ ic.IO10 # Already connected to SPI
@@ -99,60 +100,11 @@ module ESP32S3:
     signal io36 ~ ic.IO36
     signal io37 ~ ic.IO37
     signal io38 ~ ic.IO38
-    signal io39 ~ ic.IO39 # Already connected to JTAG
-    signal io40 ~ ic.IO40 # Already connected to JTAG
-    signal io41 ~ ic.IO41 # Already connected to JTAG
-    signal io42 ~ ic.IO42 # Already connected to JTAG
+    signal io39 ~ ic.IO39 # Already connected to JTAGBus
+    signal io40 ~ ic.IO40 # Already connected to JTAGBus
+    signal io41 ~ ic.IO41 # Already connected to JTAGBus
+    signal io42 ~ ic.IO42 # Already connected to JTAGBus
     signal io45 ~ ic.IO45
     signal io46 ~ ic.IO46
     signal io47 ~ ic.IO47
     signal io48 ~ ic.IO48
-
-
-component ESP32_S3_WROOM_1_N16R2_:
-    # component ESP32-S3-WROOM-1(N16R2)
-    footprint = "WIRELM-SMD_ESP32-S3-WROOM-1"
-    lcsc_id = "C2913205"
-    mpn = "C2913205"
-    # pins
-    signal GND ~ pin 41
-    GND ~ pin 40
-    signal IO1 ~ pin 39
-    signal IO2 ~ pin 38
-    signal TXD0 ~ pin 37
-    signal RXD0 ~ pin 36
-    signal IO42 ~ pin 35
-    signal IO41 ~ pin 34
-    signal IO40 ~ pin 33
-    signal IO39 ~ pin 32
-    signal IO38 ~ pin 31
-    signal IO37 ~ pin 30
-    signal IO36 ~ pin 29
-    signal IO35 ~ pin 28
-    signal IO0 ~ pin 27
-    signal IO45 ~ pin 26
-    signal IO48 ~ pin 25
-    signal IO47 ~ pin 24
-    signal IO21 ~ pin 23
-    signal IO14 ~ pin 22
-    signal IO13 ~ pin 21
-    signal IO12 ~ pin 20
-    signal IO11 ~ pin 19
-    signal IO10 ~ pin 18
-    signal IO9 ~ pin 17
-    signal IO46 ~ pin 16
-    signal IO3 ~ pin 15
-    signal IO20 ~ pin 14
-    signal IO19 ~ pin 13
-    signal IO8 ~ pin 12
-    signal IO18 ~ pin 11
-    signal IO17 ~ pin 10
-    signal IO16 ~ pin 9
-    signal IO15 ~ pin 8
-    signal IO7 ~ pin 7
-    signal IO6 ~ pin 6
-    signal IO5 ~ pin 5
-    signal IO4 ~ pin 4
-    signal EN ~ pin 3
-    signal _3V3 ~ pin 2
-    GND ~ pin 1

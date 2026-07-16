@@ -1,4 +1,4 @@
-import Power from "interfaces.ato"
+from "interfaces.ato" import Power
 from "interfaces.ato" import Power, Pair
 from "capacitors.ato" import Capacitor, CapacitorElectrolytic
 from "inductors.ato" import Inductor

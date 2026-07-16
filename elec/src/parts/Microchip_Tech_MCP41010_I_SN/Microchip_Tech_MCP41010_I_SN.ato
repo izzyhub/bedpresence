@@ -1,0 +1,23 @@
+#pragma experiment("TRAITS")
+
+import has_datasheet
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+
+component Microchip_Tech_MCP41010_I_SN_package:
+
+    trait is_atomic_part<manufacturer="Microchip Tech", partnumber="MCP41010-I/SN", footprint="SOIC-8_L4.9-W3.9-P1.27-LS6.0-BL.kicad_mod", symbol="MCP41010-I_SN.kicad_sym", model="SOIC-8_L4.9-W3.9-H1.7-LS6.0-P1.27.STEP">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C17064", manufacturer="Microchip Tech", partno="MCP41010-I/SN">
+    trait has_designator_prefix<prefix="U">
+    trait has_datasheet<datasheet="https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Microchip-Tech-MCP41010-I-SN_C17064.pdf">
+
+    # pins
+    signal PA0 ~ pin 5
+    signal PB0 ~ pin 7
+    signal PW0 ~ pin 6
+    signal SCK ~ pin 2
+    signal SI ~ pin 3
+    signal VDD ~ pin 8
+    signal VSS ~ pin 4
+    signal nCS ~ pin 1

@@ -20,7 +20,7 @@ component RectifierDiode from Diode:
     designator_prefix = "DR"
     category = "rectifier"
 
-import Power from "interfaces.ato"
+from "interfaces.ato" import Power
 module PowerDiodeOr:
     """
     A diode or gate that combines two power rails, only dropping the 
@@ -34,7 +34,7 @@ module PowerDiodeOr:
     power_in.vcc ~ diode.anode; diode.cathode ~ power_out.vcc
     power_in.gnd ~ power_out.gnd
 
-import Power_AC from "interfaces.ato"
+from "interfaces.ato" import Power_AC
 module FULLBRIDGERECTIFIER:
     power_in = new Power_AC
     power_out = new Power

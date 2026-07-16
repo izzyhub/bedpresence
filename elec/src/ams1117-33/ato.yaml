@@ -1,6 +1,8 @@
-ato-version: ^0.2.0
+requires-atopile: ^0.14.0
 builds:
   default:
     entry: elec/src/ams1117-33.ato:AMS111733
 dependencies:
-- generics
+- type: file
+  identifier: generics
+  path: ../generics

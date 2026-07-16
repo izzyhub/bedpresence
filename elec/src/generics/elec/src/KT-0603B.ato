@@ -1,4 +1,4 @@
-import LED from "led.ato"
+from "led.ato" import LED
 
 component KT_0603B from LED:
     # component Blue light 0603

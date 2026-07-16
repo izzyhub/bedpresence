@@ -1,7 +1,8 @@
-import KH_TYPE_C_16P from "elec/src/KH-TYPE-C-16P.ato"
-import Power from "generics/interfaces.ato"
-import USB2 from "generics/interfaces.ato"
-import Resistor from "generics/resistors.ato"
+#pragma experiment("TRAITS")
+from "parts/Shenzhen_Kinghelm_Elec_KH_TYPE_C_16P/Shenzhen_Kinghelm_Elec_KH_TYPE_C_16P.ato" import Shenzhen_Kinghelm_Elec_KH_TYPE_C_16P_package
+from "generics/interfaces.ato" import Power
+from "generics/interfaces.ato" import USB2
+import Resistor
 
 module GenericUSBConn:
     power = new Power
@@ -9,7 +10,7 @@ module GenericUSBConn:
 
 module USBCConn from GenericUSBConn:
     signal gnd
-    conn = new KH_TYPE_C_16P
+    conn = new Shenzhen_Kinghelm_Elec_KH_TYPE_C_16P_package
 
     # Connect VBUS
     conn.VBUS ~ power.vcc
@@ -25,10 +26,10 @@ module USBCConn from GenericUSBConn:
     # Add CC resistors
     cc1_res = new Resistor
     cc2_res = new Resistor
-    cc1_res.value = 5.1kohms +/- 20%
-    cc2_res.value = 5.1kohms +/- 20%
+    cc1_res.resistance = 5.1kohm +/- 20%
+    cc2_res.resistance = 5.1kohm +/- 20%
     cc1_res.package = "0402"
     cc2_res.package = "0402"
 
-    conn.CC1 ~ cc1_res.p1; cc1_res.p2 ~ power.gnd
-    conn.CC2 ~ cc2_res.p1; cc2_res.p2 ~ power.gnd
+    conn.CC1 ~ cc1_res.unnamed[0]; cc1_res.unnamed[1] ~ power.gnd
+    conn.CC2 ~ cc2_res.unnamed[0]; cc2_res.unnamed[1] ~ power.gnd

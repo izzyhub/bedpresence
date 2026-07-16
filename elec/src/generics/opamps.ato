@@ -5,7 +5,7 @@ component Opamp:
     signal output
     designator_prefix = "U"
 
-import Power from "interfaces.ato"
+from "interfaces.ato" import Power
 module VoltageFollower:
     power = new Power
     opamp = new Opamp

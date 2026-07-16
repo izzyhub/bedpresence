@@ -1,0 +1,19 @@
+#pragma experiment("TRAITS")
+
+import has_datasheet
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+
+component ALPSALPINE_SKRPACE010_package:
+
+    trait is_atomic_part<manufacturer="ALPSALPINE", partnumber="SKRPACE010", footprint="KEY-SMD_4P-L4.2-W3.2-P2.20-LS4.6.kicad_mod", symbol="SKRPACE010.kicad_sym", model="KEY-SMD_4P-L4.2-W3.2-H2.5-LS4.6-P2.2.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C139797", manufacturer="ALPSALPINE", partno="SKRPACE010">
+    trait has_designator_prefix<prefix="SW">
+    trait has_datasheet<datasheet="https://www.lcsc.com/datasheet/lcsc_datasheet_1811051610_ALPSALPINE-SKRPACE010_C139797.pdf">
+
+    # pins
+    pin 1
+    pin 2
+    pin 3
+    pin 4

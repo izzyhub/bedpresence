@@ -1,5 +1,7 @@
+#pragma experiment("TRAITS")
 from "interfaces.ato" import Pair, Power
-from "resistors.ato" import Resistor
+from "parts/ALPSALPINE_SKRPACE010/ALPSALPINE_SKRPACE010.ato" import ALPSALPINE_SKRPACE010_package
+import Resistor
 
 module NoButton:
     """
@@ -21,25 +23,19 @@ module NoButton:
         micro = new MyMicrocontroller #instantiate microcontroller (in this case there will be no button in your design)
         button_pullup.btn -> ButtonSKRPACE010 #replace with class, now there will be a button in your design.
     """
-    signal in
+    signal input
     signal out
 
-component _ButtonSKRPACE010:
-    signal in ~ pin 1
-    in ~ pin 2
-    signal out ~ pin 3
-    out ~ pin 4
-    footprint = "KEY-SMD_4P-L4.2-W3.2-P2.20-LS4.6"
-    mpn = "C139797"
-
 module ButtonSKRPACE010 from NoButton:
-    btn = new _ButtonSKRPACE010
-    in ~ btn.in
-    out ~ btn.out
+    btn = new ALPSALPINE_SKRPACE010_package
+    input ~ btn.1
+    input ~ btn.2
+    out ~ btn.3
+    out ~ btn.4
 
 component _ButtonSKTDLDE010:
-    in ~ pin 1
-    out ~ pin 2
+    signal input ~ pin 1
+    signal out ~ pin 2
     signal anchor ~ pin 3
     anchor ~ pin 4
 
@@ -51,7 +47,7 @@ module ButtonSKTDLDE010 from NoButton:
     Small SMD right angle button
     """
     btn = new _ButtonSKTDLDE010
-    in ~ btn.in
+    input ~ btn.input
     out ~ btn.out
 
 module ButtonPullup:
@@ -61,15 +57,13 @@ module ButtonPullup:
     power = new Power
     pullup = new Resistor
 
-    signal out # depricated
-
     output.io ~ out
     output.gnd ~ power.gnd
-    pullup.value = 10kohms +/- 20%
+    pullup.resistance = 10kohm +/- 20%
     pullup.package = "0402"
 
-    power.vcc ~ pullup.p1; pullup.p2 ~ btn.in; btn.out ~ power.gnd
-    out ~ btn.in
+    power.vcc ~ pullup.unnamed[0]; pullup.unnamed[1] ~ btn.input; btn.out ~ power.gnd
+    out ~ btn.input
 
     output.io ~ out
     output.gnd ~ power.gnd
@@ -80,14 +74,11 @@ module ButtonPulldown:
     output = new Pair
     power = new Power
     pulldown = new Resistor
-    pulldown.value = 10kohms +/- 20%
+    pulldown.resistance = 10kohm +/- 20%
     pulldown.package = "0402"
 
-    power.gnd ~ pulldown.p1; pulldown.p2 ~ btn.in; btn.out ~ power.vcc
-    out ~ btn.in
+    power.gnd ~ pulldown.unnamed[0]; pulldown.unnamed[1] ~ btn.input; btn.out ~ power.vcc
+    out ~ btn.input
 
     output.io ~ out
     output.gnd ~ power.gnd
-
-module ButtonPullup90Degree from ButtonPullup:
-    btn -> _1TS003B_1400_3500A

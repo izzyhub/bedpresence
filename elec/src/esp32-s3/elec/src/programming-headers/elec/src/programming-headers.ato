@@ -1,6 +1,6 @@
-import JTAG from "generics/interfaces.ato"
-import Power from "generics/interfaces.ato"
-import SWD from "generics/interfaces.ato"
+from "generics/interfaces.ato" import JTAGBus
+from "generics/interfaces.ato" import Power
+from "generics/interfaces.ato" import SWDBus
 
 component HB_PH9_12725PB2GOB:
     # component HB-PH9-12725PB2GOB
@@ -22,7 +22,7 @@ component HB_PH9_12725PB2GOB:
 
 
 module JTAG_10PIN:
-    jtag = new JTAG
+    jtag = new JTAGBus
     connector = new HB_PH9_12725PB2GOB
     jtag.tck ~ connector.4
     jtag.tms ~ connector.2
@@ -34,7 +34,7 @@ module JTAG_10PIN:
     jtag.gnd ~ connector.5
     jtag.gnd ~ connector.9
 
-    swd = new SWD
+    swd = new SWDBus
     swd.swdio ~ connector.2
     swd.swclk ~ connector.4
     swd.swo ~ connector.6
@@ -53,7 +53,7 @@ component TC2050:
     signal rst ~ pin 10
     signal vcc ~ pin 1
 
-    jtag = new JTAG
+    jtag = new JTAGBus
     jtag.tdo ~ tdo
     jtag.tdi ~ tdi
     jtag.tms ~ tms

@@ -1,9 +1,9 @@
-import Power from "interfaces.ato"
-import Pair from "interfaces.ato"
-import DiffPair from "interfaces.ato"
-import Load from "interfaces.ato"
-import Resistor from "resistors.ato"
-import Diode from "diodes.ato"
+from "interfaces.ato" import Power
+from "interfaces.ato" import Pair
+from "interfaces.ato" import DiffPair
+from "interfaces.ato" import Load
+from "resistors.ato" import Resistor
+from "diodes.ato" import Diode
 
 component NFET:
     signal gate
@@ -73,6 +73,6 @@ module LowSideSwitch:
     # source to ground
     fet.source ~ power.gnd
 
-import NTTFS4C25NTWG from "elec/src/NTTFS4C25NTWG.ato"
+from "elec/src/NTTFS4C25NTWG.ato" import NTTFS4C25NTWG
 module LowSideSwitch30V5A from LowSideSwitch:
     fet -> NTTFS4C25NTWG

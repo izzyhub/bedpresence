@@ -1,5 +1,5 @@
-import SPI from "generics/interfaces.ato"
-import Power from "generics/interfaces.ato"
+from "generics/interfaces.ato" import SPIBus
+from "generics/interfaces.ato" import Power
 
 component _TF_01A:
     # component TF-01A
@@ -26,7 +26,7 @@ component _TF_01A:
 module TF_01A:
     card_slot = new _TF_01A
     power = new Power
-    spi = new SPI
+    spi = new SPIBus
 
     # Power
     power.vcc ~ card_slot.VDD

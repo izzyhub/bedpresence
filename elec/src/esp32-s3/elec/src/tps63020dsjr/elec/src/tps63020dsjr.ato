@@ -1,8 +1,8 @@
-import Power from "generics/interfaces.ato"
-import AdjustableRegulator from "generics/regulators.ato"
-import Inductor from "generics/inductors.ato"
-import Capacitor from "generics/capacitors.ato"
-import Resistor from "generics/resistors.ato"
+from "generics/interfaces.ato" import Power
+from "generics/vregs.ato" import AdjustableRegulator
+from "generics/inductors.ato" import Inductor
+from "generics/capacitors.ato" import Capacitor
+from "generics/resistors.ato" import Resistor
 
 component _TPS63020DSJR:
     # component TPS63020DSJR
@@ -45,7 +45,7 @@ module TPS63020DSJR from AdjustableRegulator:
     ic.GND ~ power_out.gnd
 
     # feedback divider
-    feedback_div.in ~ power_out
+    feedback_div.power ~ power_out
     feedback_div.out ~ ic.FB
     # feedback_div.r_top.value = 1Mohm +/- 5%
     feedback_div.r_top.package = "0402"

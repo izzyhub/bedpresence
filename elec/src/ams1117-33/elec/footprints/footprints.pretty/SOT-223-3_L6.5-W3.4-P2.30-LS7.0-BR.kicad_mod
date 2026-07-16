@@ -1,27 +1,161 @@
-(module easyeda2kicad:SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR (layer F.Cu) (tedit 5DC5F6A4)
+(footprint "SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -6.3 0)
+		(layer "F.SilkS")
+		(uuid "e9d2d0e6-261d-4e39-beb4-b182f03bb7b4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR"
+		(at 0 6.3 0)
+		(layer "F.Fab")
+		(uuid "c0280f6e-03b4-43c6-80df-c314d94be7fb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "80cb9ff8-387f-445e-86b9-6a097dd9390a")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "29ee2889-d188-458c-9bbd-eed0e65f0cb5")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
 	(attr smd)
-	(fp_text reference REF** (at 0 -6.3) (layer F.SilkS)
-		(effects (font (size 1 1) (thickness 0.15)))
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.57 -3.33)
+		(end 1.37 -3.33)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "55205cc4-1729-4f8f-aa73-c5c11b148af7")
 	)
-	(fp_text value SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR (at 0 6.3) (layer F.Fab)
-		(effects (font (size 1 1) (thickness 0.15)))
+	(fp_line
+		(start -1.57 3.33)
+		(end -1.57 -3.33)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "cb32db40-a594-4003-a0be-a860796f7494")
 	)
-	(fp_text user %R (at 0 0) (layer F.Fab)
-		(effects (font (size 1 1) (thickness 0.15)))
+	(fp_line
+		(start 1.37 -3.33)
+		(end 1.37 3.33)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "2210b2c3-1ba2-4be1-9550-4ef622bf6487")
 	)
-	(fp_line (start -1.57 3.33) (end -1.57 -3.33) (layer F.SilkS) (width 0.15))
-	(fp_line (start -1.57 -3.33) (end 1.37 -3.33) (layer F.SilkS) (width 0.15))
-	(fp_line (start 1.37 -3.33) (end 1.37 3.33) (layer F.SilkS) (width 0.15))
-	(fp_line (start 1.37 3.33) (end -1.57 3.33) (layer F.SilkS) (width 0.15))
-	(pad 1 smd rect (at 2.97 2.30 0.00) (size 2.50 1.10) (layers F.Cu F.Paste F.Mask))
-	(pad 2 smd rect (at 2.97 0.00 0.00) (size 2.50 1.10) (layers F.Cu F.Paste F.Mask))
-	(pad 3 smd rect (at 2.97 -2.30 0.00) (size 2.50 1.10) (layers F.Cu F.Paste F.Mask))
-	(pad 4 smd rect (at -2.97 0.00 0.00) (size 2.34 3.60) (layers F.Cu F.Paste F.Mask))
-	(fp_circle (center 3.40 3.25) (end 3.43 3.25) (layer F.Fab) (width 0.06))
-	(fp_circle (center 4.55 2.19) (end 4.80 2.19) (layer Cmts.User) (width 0.50))
+	(fp_line
+		(start 1.37 3.33)
+		(end -1.57 3.33)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "f0d9e780-a865-4e9f-92f0-b954708c2fa1")
+	)
+	(fp_circle
+		(center 4.55 2.19)
+		(end 4.8 2.19)
+		(stroke
+			(width 0.5)
+			(type solid)
+		)
+		(fill no)
+		(layer "Cmts.User")
+		(uuid "82e94646-6778-4def-aa40-e8be3a4b27b3")
+	)
+	(fp_circle
+		(center 3.4 3.25)
+		(end 3.43 3.25)
+		(stroke
+			(width 0.06)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "f1769886-451c-4e25-bc4c-8baa804f802c")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "b0337e8e-89a8-4a92-9136-cbf2d95c3428")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at 2.97 2.3)
+		(size 2.5 1.1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "ce639c3b-4e58-4b5f-85b2-43e3cef63b3c")
+	)
+	(pad "2" smd rect
+		(at 2.97 0)
+		(size 2.5 1.1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "05d8848b-a115-4681-81db-a7cf1e8b8b29")
+	)
+	(pad "3" smd rect
+		(at 2.97 -2.3)
+		(size 2.5 1.1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "8b8d775b-027b-4635-a356-54efca284b78")
+	)
+	(pad "4" smd rect
+		(at -2.97 0)
+		(size 2.34 3.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "a172cb80-8fb9-477d-a584-868beb86e65f")
+	)
+	(embedded_fonts no)
 	(model "/Users/narayanpowderly/Documents/atopile-workspace/swoop/.ato/modules/ams1117-33/elec/footprints/footprints.3dshapes/SOT-223-4P_L6.5-W3.5-H1.6-LS7.0-P2.30.wrl"
-		(offset (xyz -3.990 2.920 -0.000))
-		(scale (xyz 1 1 1))
-		(rotate (xyz 0 0 180))
+		(offset
+			(xyz -3.99 2.92 -0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 180)
+		)
 	)
 )

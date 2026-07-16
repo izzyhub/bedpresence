@@ -1,5 +1,5 @@
-import Power from "interfaces.ato"
-import I2C from "interfaces.ato"
+from "interfaces.ato" import Power
+from "interfaces.ato" import I2CBus
 
 component Resistor:
     signal p1 ~ pin 1
@@ -7,7 +7,7 @@ component Resistor:
     designator_prefix = "R"
     mpn = "generic_resistor"
     type = "resistor"
-    value: resistance
+    value: ohm
 
     # Equations
     # R = V/I
@@ -17,7 +17,7 @@ module I2CPullup:
     r_sda = new Resistor
     r_scl = new Resistor
     power = new Power
-    i2c = new I2C
+    i2c = new I2CBus
 
     r_sda.value = 10kohm +/- 20%
     r_scl.value = 10kohm +/- 20%

@@ -1,5 +1,5 @@
-import Capacitor from "capacitors.ato"
-import Pair from "interfaces.ato"
+from "capacitors.ato" import Capacitor
+from "interfaces.ato" import Pair
 
 component Crystal:
     signal xin

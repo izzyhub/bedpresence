@@ -1,8 +1,9 @@
+#pragma experiment("TRAITS")
 interface Power:
     signal vcc
     signal gnd
 
-    voltage: voltage
+    voltage: V
 
 
 interface FloatPower:
@@ -34,18 +35,18 @@ interface GPIO:
     signal io
     signal gnd
 
-interface I2C:
+interface I2CBus:
     signal sda
     signal scl
     signal gnd
 
-interface SWD:
+interface SWDBus:
     signal swclk
     signal swdio
     signal swo
     signal gnd
 
-interface SPI:
+interface SPIBus:
     signal mosi
     signal miso
     signal sck
@@ -60,7 +61,7 @@ interface LCDSPI:
     signal reset
     signal backlightEN
 
-interface UART:
+interface UARTBus:
     signal tx
     signal rx
     signal gnd
@@ -109,7 +110,7 @@ interface SDIO:
     signal dat2
     signal dat3
 
-interface JTAG:
+interface JTAGBus:
     signal tck
     signal tms
     signal tdi

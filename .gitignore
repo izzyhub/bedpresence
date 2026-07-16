@@ -41,3 +41,9 @@ venv/
 
 # IDEs
 .vscode/
+
+# Generated DRC/export output (kicad-mcp-pro)
+output/
+
+# Python bytecode (elec/tools)
+__pycache__/

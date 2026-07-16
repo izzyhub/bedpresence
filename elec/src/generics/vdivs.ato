@@ -1,17 +1,18 @@
-import Resistor from "resistors.ato"
-import Capacitor from "capacitors.ato"
-import Power from "interfaces.ato"
-import Pair from "interfaces.ato"
+#pragma experiment("TRAITS")
+from "interfaces.ato" import Power
+from "interfaces.ato" import Pair
+import Resistor
+import Capacitor
 
 module VDiv from _VDiv:
-    v_in: voltage
-    v_out: voltage
-    i_q: current
+    v_in: V
+    v_out: V
+    i_q: A
 
     i_q = 100uA to 10mA
 
-    assert v_in * r_bottom.value / (r_top.value + r_bottom.value) within v_out
-    assert v_in / (r_bottom.value + r_top.value) within i_q
+    assert v_in * r_bottom.resistance / (r_top.resistance + r_bottom.resistance) within v_out
+    assert v_in / (r_bottom.resistance + r_top.resistance) within i_q
 
 
 module _VDiv:
@@ -23,9 +24,7 @@ module _VDiv:
     output.io ~ out
     output.gnd ~ bottom
 
-    in = new Power # legacy
     power = new Power
-    in ~ power
     power.vcc ~ top
     power.gnd ~ bottom
 
@@ -34,17 +33,15 @@ module _VDiv:
     r_top.package = "0402"
     r_bottom.package = "0402"
 
-    top ~ r_top.1; r_top.2 ~ r_bottom.1; r_bottom.2 ~ bottom
-    r_top.2 ~ out
+    top ~ r_top.unnamed[0]; r_top.unnamed[1] ~ r_bottom.unnamed[0]; r_bottom.unnamed[1] ~ bottom
+    r_top.unnamed[1] ~ out
 
 module VDivLowPassFilter from VDiv:
     cap = new Capacitor
-    cap.package = "0402"
-    cutoff_frequency: frequency
+    cap.package = "C0402"
+    cutoff_frequency: Hz
 
-    out ~ cap.1; cap.2 ~ bottom
-    cap.value = 100nF +/- 10%
+    out ~ cap.unnamed[0]; cap.unnamed[1] ~ bottom
+    cap.capacitance = 100nF +/- 10%
 
-    cutoff_frequency: frequency
-
-    assert 1 / (2 * 3.14 * r_top.value * cap.value) within cutoff_frequency
+    assert 1 / (2 * 3.14 * r_top.resistance * cap.capacitance) within cutoff_frequency

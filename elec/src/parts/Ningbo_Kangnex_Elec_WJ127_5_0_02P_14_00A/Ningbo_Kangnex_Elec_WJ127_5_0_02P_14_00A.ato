@@ -1,0 +1,19 @@
+#pragma experiment("TRAITS")
+
+import has_datasheet
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+
+component Ningbo_Kangnex_Elec_WJ127_5_0_02P_14_00A_package:
+    """WJ127-5.0-2P"""
+
+
+    trait is_atomic_part<manufacturer="Ningbo Kangnex Elec", partnumber="WJ127-5.0-02P-14-00A", footprint="CONN-TH_2P-P5.00_CPC3703CTR.kicad_mod", symbol="WJ127-5.0-2P.kicad_sym", model="CONN-TH_3P-P5.00_XD127V-5.0-3P-V.STEP">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C3703", manufacturer="Ningbo Kangnex Elec", partno="WJ127-5.0-02P-14-00A">
+    trait has_designator_prefix<prefix="P">
+    trait has_datasheet<datasheet="https://www.lcsc.com/datasheet/lcsc_datasheet_1912251631_Ningbo-Kangnex-Elec-WJ127-5-0-2P_C3703.pdf">
+
+    # pins
+    pin 1
+    pin 2
