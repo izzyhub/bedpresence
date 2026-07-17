@@ -1,8 +1,0 @@
-requires-atopile: ^0.14.0
-builds:
-  default:
-    entry: elec/src/tf-01a.ato:TF_01A
-dependencies:
-- type: file
-  identifier: generics
-  path: ../../../../generics

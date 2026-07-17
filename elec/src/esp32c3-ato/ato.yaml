@@ -1,8 +1,0 @@
-requires-atopile: ^0.14.0
-builds:
-  default:
-    entry: esp32c3.ato:_ESP32C3
-dependencies:
-- type: file
-  identifier: generics
-  path: ../generics

@@ -1,8 +1,0 @@
-requires-atopile: ^0.14.0
-builds:
-  default:
-    entry: elec/src/tps63020dsjr.ato:TPS63020DSJR
-dependencies:
-- type: file
-  identifier: generics
-  path: ../../../../generics

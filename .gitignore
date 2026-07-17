@@ -47,3 +47,8 @@ output/
 
 # Python bytecode (elec/tools)
 __pycache__/
+
+# atopile picker-generated passive parts (regenerated from Capacitor/Resistor
+# constraints on every build; not source). Keep the repo lean.
+elec/src/parts/Samsung_Electro_Mechanics_*/
+elec/src/parts/UNI_ROYAL_*/
