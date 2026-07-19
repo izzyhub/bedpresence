@@ -26,8 +26,10 @@ module USBCConn from GenericUSBConn:
     # Add CC resistors
     cc1_res = new Resistor
     cc2_res = new Resistor
-    cc1_res.resistance = 5.1kohm +/- 20%
-    cc2_res.resistance = 5.1kohm +/- 20%
+    # USB-C Rd must be 5.1k +/-10% (4.59k-5.61k). At +/-20% the part picker
+    # chose 4.7k, right at the edge of spec; +/-5% forces a real 5.1k.
+    cc1_res.resistance = 5.1kohm +/- 5%
+    cc2_res.resistance = 5.1kohm +/- 5%
     cc1_res.package = "0402"
     cc2_res.package = "0402"
 

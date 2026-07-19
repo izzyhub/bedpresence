@@ -45,6 +45,13 @@ module ESP32S3:
     enable_button.out ~ ic.EN
     enable_button.btn -> ButtonSKRPACE010
 
+    # EN/CHIP_PU power-on-reset delay (Espressif recommends ~1uF against the
+    # 10k pullup); also debounces the reset button.
+    en_cap = new Capacitor
+    en_cap.capacitance = 1uF +/- 20%
+    en_cap.package = "C0402"
+    ic.EN ~ en_cap.unnamed[0]; en_cap.unnamed[1] ~ power.gnd
+
     # connect up USB
     usb2 = new USB2
     usb2.dm ~ ic.IO19

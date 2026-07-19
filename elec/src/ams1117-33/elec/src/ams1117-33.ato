@@ -17,7 +17,8 @@ module AMS111733 from Regulator:
     power_in.vcc ~ input_cap.unnamed[0]; input_cap.unnamed[1] ~ power_in.gnd
     input_cap.package = "0805"
 
+    # AMS1117 datasheet calls for >=22uF on the output for stability.
     output_cap = new Capacitor
-    output_cap.capacitance = 10uF +/- 20%
+    output_cap.capacitance = 22uF +/- 20%
     power_out.vcc ~ output_cap.unnamed[0]; output_cap.unnamed[1] ~ power_out.gnd
     output_cap.package = "0805"

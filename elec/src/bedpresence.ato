@@ -13,6 +13,8 @@ from "ams1117-33/elec/src/ams1117-33.ato" import AMS111733
 from "parts/Ningbo_Kangnex_Elec_WJ127_5_0_02P_14_00A/Ningbo_Kangnex_Elec_WJ127_5_0_02P_14_00A.ato" import Ningbo_Kangnex_Elec_WJ127_5_0_02P_14_00A_package
 from "MCP41010_minus_I_slash_SN.ato" import DigiPot
 from "atopile/mounting-holes/mounting-holes.ato" import MountingHole_3_2_M3_Pad
+import Resistor
+import Capacitor
 
 module Bedpresence:
     signal gnd
@@ -63,37 +65,90 @@ module Bedpresence:
     micro.jtag ~ jtag_connector.jtag;
     usbc_connector.usb2 ~ micro.usb2;
 
-    # Each channel: 3V3 -- [digipot as rheostat] -- sense node -- [FSR] -- GND
+    # Each channel: 3V3 -- [limit R] -- [digipot as rheostat] -- sense node -- [FSR] -- GND
     # PW0 (wiper) is tied to PB0 so the pot acts as a 2-terminal variable
     # resistor; without this the PA0-PB0 path is a fixed 10k and SPI writes
     # have no electrical effect. The sense node goes to an ADC1 pin on the
     # micro (ADC1 keeps working while WiFi is on; ADC2 does not).
+    #
+    # The fixed 3.9k limit resistor caps the current through the pot wiper at
+    # ~0.85mA: the MCP41010's absolute max wiper current is 1mA, and with the
+    # pot at a low code a hard-pressed FSR (a few hundred ohms) would
+    # otherwise pull >10mA through it.
+    #
+    # The 1k + 100nF RC between the sense node and the ADC pin filters noise
+    # picked up on the long FSR leads and gives the ESP32 ADC a low-impedance
+    # source to sample from.
+    limit_res1 = new Resistor
+    limit_res1.resistance = 3.9kohm +/- 5%
+    limit_res1.package = "0402"
+    filter_res1 = new Resistor
+    filter_res1.resistance = 1kohm +/- 5%
+    filter_res1.package = "0402"
+    filter_cap1 = new Capacitor
+    filter_cap1.capacitance = 100nF +/- 20%
+    filter_cap1.package = "C0402"
+
     digi_pot1.power ~ power3v3;
-    digi_pot1.pot.PA0 ~ power3v3.vcc;
+    power3v3.vcc ~ limit_res1.unnamed[0]; limit_res1.unnamed[1] ~ digi_pot1.pot.PA0
     digi_pot1.pot.PW0 ~ digi_pot1.pot.PB0;
     digi_pot1.pot.PB0 ~ connector1.1;
-    connector1.1 ~ micro.io1;
+    connector1.1 ~ filter_res1.unnamed[0]; filter_res1.unnamed[1] ~ micro.io1
+    micro.io1 ~ filter_cap1.unnamed[0]; filter_cap1.unnamed[1] ~ power3v3.gnd
     power3v3.gnd ~ connector1.2;
 
+    limit_res2 = new Resistor
+    limit_res2.resistance = 3.9kohm +/- 5%
+    limit_res2.package = "0402"
+    filter_res2 = new Resistor
+    filter_res2.resistance = 1kohm +/- 5%
+    filter_res2.package = "0402"
+    filter_cap2 = new Capacitor
+    filter_cap2.capacitance = 100nF +/- 20%
+    filter_cap2.package = "C0402"
+
     digi_pot2.power ~ power3v3;
-    digi_pot2.pot.PA0 ~ power3v3.vcc;
+    power3v3.vcc ~ limit_res2.unnamed[0]; limit_res2.unnamed[1] ~ digi_pot2.pot.PA0
     digi_pot2.pot.PW0 ~ digi_pot2.pot.PB0;
     digi_pot2.pot.PB0 ~ connector2.1;
-    connector2.1 ~ micro.io2;
+    connector2.1 ~ filter_res2.unnamed[0]; filter_res2.unnamed[1] ~ micro.io2
+    micro.io2 ~ filter_cap2.unnamed[0]; filter_cap2.unnamed[1] ~ power3v3.gnd
     power3v3.gnd ~ connector2.2;
 
+    limit_res3 = new Resistor
+    limit_res3.resistance = 3.9kohm +/- 5%
+    limit_res3.package = "0402"
+    filter_res3 = new Resistor
+    filter_res3.resistance = 1kohm +/- 5%
+    filter_res3.package = "0402"
+    filter_cap3 = new Capacitor
+    filter_cap3.capacitance = 100nF +/- 20%
+    filter_cap3.package = "C0402"
+
     digi_pot3.power ~ power3v3;
-    digi_pot3.pot.PA0 ~ power3v3.vcc;
+    power3v3.vcc ~ limit_res3.unnamed[0]; limit_res3.unnamed[1] ~ digi_pot3.pot.PA0
     digi_pot3.pot.PW0 ~ digi_pot3.pot.PB0;
     digi_pot3.pot.PB0 ~ connector3.1;
-    connector3.1 ~ micro.io4;
+    connector3.1 ~ filter_res3.unnamed[0]; filter_res3.unnamed[1] ~ micro.io4
+    micro.io4 ~ filter_cap3.unnamed[0]; filter_cap3.unnamed[1] ~ power3v3.gnd
     power3v3.gnd ~ connector3.2;
 
+    limit_res4 = new Resistor
+    limit_res4.resistance = 3.9kohm +/- 5%
+    limit_res4.package = "0402"
+    filter_res4 = new Resistor
+    filter_res4.resistance = 1kohm +/- 5%
+    filter_res4.package = "0402"
+    filter_cap4 = new Capacitor
+    filter_cap4.capacitance = 100nF +/- 20%
+    filter_cap4.package = "C0402"
+
     digi_pot4.power ~ power3v3;
-    digi_pot4.pot.PA0 ~ power3v3.vcc;
+    power3v3.vcc ~ limit_res4.unnamed[0]; limit_res4.unnamed[1] ~ digi_pot4.pot.PA0
     digi_pot4.pot.PW0 ~ digi_pot4.pot.PB0;
     digi_pot4.pot.PB0 ~ connector4.1;
-    connector4.1 ~ micro.io5;
+    connector4.1 ~ filter_res4.unnamed[0]; filter_res4.unnamed[1] ~ micro.io5
+    micro.io5 ~ filter_cap4.unnamed[0]; filter_cap4.unnamed[1] ~ power3v3.gnd
     power3v3.gnd ~ connector4.2;
 
     # Without this the `gnd` signal is an island and the mounting holes end up
